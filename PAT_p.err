@@ -1,0 +1,26 @@
+﻿Checking project dependencies...
+Building PAT_p.dproj (Debug, Win32)
+brcc32 command line for "PAT_p.vrc"
+  c:\program files (x86)\embarcadero\studio\23.0\bin\cgrc.exe -c65001 PAT_p.vrc -foPAT_p.res 
+dcc32 command line for "PAT_p.dpr"
+  c:\program files (x86)\embarcadero\studio\23.0\bin\dcc32.exe -$O- -$W+ -$R+ -$Q+ --no-config -B -Q -TX.exe 
+  -AGenerics.Collections=System.Generics.Collections;Generics.Defaults=System.Generics.Defaults;WinTypes=Winapi.Windows;WinProcs=Winapi.Windows;
+  DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE -DDEBUG;;FRAMEWORK_VCL -E.\Win32\Debug -I"c:\program files (x86)\embarcadero\studio\23.0\lib\Win32\debug";
+  "c:\program files (x86)\embarcadero\studio\23.0\lib\Win32\release";C:\Users\User\Documents\Embarcadero\Studio\23.0\Imports;
+  C:\Users\User\Documents\Embarcadero\Studio\23.0\Imports\Win32;"c:\program files (x86)\embarcadero\studio\23.0\Imports";
+  C:\Users\Public\Documents\Embarcadero\Studio\23.0\Dcp;"c:\program files (x86)\embarcadero\studio\23.0\include" 
+  -LEC:\Users\Public\Documents\Embarcadero\Studio\23.0\Bpl -LNC:\Users\Public\Documents\Embarcadero\Studio\23.0\Dcp -NU.\Win32\Debug -NSWinapi;
+  System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell; 
+  -O"c:\program files (x86)\embarcadero\studio\23.0\lib\Win32\release";C:\Users\User\Documents\Embarcadero\Studio\23.0\Imports;
+  C:\Users\User\Documents\Embarcadero\Studio\23.0\Imports\Win32;"c:\program files (x86)\embarcadero\studio\23.0\Imports";
+  C:\Users\Public\Documents\Embarcadero\Studio\23.0\Dcp;"c:\program files (x86)\embarcadero\studio\23.0\include" -R"c:\program files 
+  (x86)\embarcadero\studio\23.0\lib\Win32\release";C:\Users\User\Documents\Embarcadero\Studio\23.0\Imports;
+  C:\Users\User\Documents\Embarcadero\Studio\23.0\Imports\Win32;"c:\program files (x86)\embarcadero\studio\23.0\Imports";
+  C:\Users\Public\Documents\Embarcadero\Studio\23.0\Dcp;"c:\program files (x86)\embarcadero\studio\23.0\include" -U"c:\program files 
+  (x86)\embarcadero\studio\23.0\lib\Win32\debug";"c:\program files (x86)\embarcadero\studio\23.0\lib\Win32\release";
+  C:\Users\User\Documents\Embarcadero\Studio\23.0\Imports;C:\Users\User\Documents\Embarcadero\Studio\23.0\Imports\Win32;"c:\program files 
+  (x86)\embarcadero\studio\23.0\Imports";C:\Users\Public\Documents\Embarcadero\Studio\23.0\Dcp;"c:\program files (x86)\embarcadero\studio\23.0\include" 
+  -V -VN -NBC:\Users\Public\Documents\Embarcadero\Studio\23.0\Dcp -NHC:\Users\Public\Documents\Embarcadero\Studio\23.0\hpp\Win32 -NO.\Win32\Debug  
+  PAT_p.dpr   
+Success
+Elapsed time: 00:00:02.0

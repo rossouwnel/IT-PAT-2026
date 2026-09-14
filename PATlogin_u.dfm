@@ -1,10 +1,10 @@
 object frmLogin: TfrmLogin
   Left = 0
   Top = 0
-  Caption = 'frmLogin'
+  Caption = 'Fresh Count'
   ClientHeight = 633
   ClientWidth = 418
-  Color = clBtnFace
+  Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
