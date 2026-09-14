@@ -51,9 +51,14 @@ var
 
 implementation
 
+uses
+  PATmenu_u;
+
 {$R *.dfm}
 
 procedure TfrmLogin.btn_login1Click(Sender: TObject);
+var
+  MenuForm: TfrmMenu;
 begin
   if Trim(edt_login1.Text) = '' then
   begin
@@ -83,8 +88,17 @@ begin
     Exit;
   end;
 
-  MessageDlg('Welcome to Fresh Count, ' + Trim(edt_login1.Text) + '!',
-    mtInformation, [mbOK], 0);
+  MenuForm := TfrmMenu.Create(Self);
+  try
+    MenuForm.SetUsername(Trim(edt_login1.Text));
+    Hide;
+    MenuForm.ShowModal;
+  finally
+    MenuForm.Free;
+    edt_login2.Text := '';
+    Show;
+    edt_login1.SetFocus;
+  end;
 end;
 
 procedure TfrmLogin.btn_login2Click(Sender: TObject);

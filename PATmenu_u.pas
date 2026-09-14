@@ -1,0 +1,224 @@
+unit PATmenu_u;
+
+interface
+
+uses
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
+  Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmMenu = class(TForm)
+    pnlSidebar: TPanel;
+    lblBrand: TLabel;
+    lblTagline: TLabel;
+    btnOverview: TButton;
+    btnInventory: TButton;
+    btnProducts: TButton;
+    btnSuppliers: TButton;
+    btnReports: TButton;
+    btnSignOut: TButton;
+    pnlContent: TPanel;
+    lblEyebrow: TLabel;
+    lblTitle: TLabel;
+    lblDescription: TLabel;
+    pnlStatus: TPanel;
+    shpStatus: TShape;
+    lblStatusTitle: TLabel;
+    lblStatusText: TLabel;
+    pnlCards: TPanel;
+    pnlCard1: TPanel;
+    lblCardValue1: TLabel;
+    lblCardCaption1: TLabel;
+    pnlCard2: TPanel;
+    lblCardValue2: TLabel;
+    lblCardCaption2: TLabel;
+    pnlCard3: TPanel;
+    lblCardValue3: TLabel;
+    lblCardCaption3: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure MenuButtonClick(Sender: TObject);
+    procedure btnSignOutClick(Sender: TObject);
+  private
+    FUsername: string;
+    procedure SetActiveSection(AButton: TButton; const ATitle,
+      ADescription, AStatusTitle, AStatusText: string; AShowCards: Boolean);
+    procedure StyleMenuButton(AButton: TButton);
+  public
+    procedure SetUsername(const AUsername: string);
+  end;
+
+var
+  frmMenu: TfrmMenu;
+
+implementation
+
+{$R *.dfm}
+
+const
+  COLOR_PAPER = $00EAF1F5;
+  COLOR_FOREST = $00283A28;
+  COLOR_SAGE = $00A0B89A;
+  COLOR_MUTED = $00777B77;
+  COLOR_BORDER = $00D7DED9;
+
+procedure TfrmMenu.FormCreate(Sender: TObject);
+begin
+  Caption := 'Fresh Count - Menu';
+  Position := poScreenCenter;
+  Constraints.MinWidth := 760;
+  Constraints.MinHeight := 540;
+  DoubleBuffered := True;
+
+  pnlSidebar.ParentBackground := False;
+  pnlSidebar.Color := COLOR_FOREST;
+  pnlSidebar.BevelOuter := bvNone;
+
+  lblBrand.Font.Name := 'Georgia';
+  lblBrand.Font.Size := 18;
+  lblBrand.Font.Style := [fsBold];
+  lblBrand.Font.Color := clWhite;
+  lblBrand.ParentFont := False;
+
+  lblTagline.Font.Name := 'Segoe UI';
+  lblTagline.Font.Size := 9;
+  lblTagline.Font.Color := COLOR_SAGE;
+  lblTagline.ParentFont := False;
+
+  StyleMenuButton(btnOverview);
+  StyleMenuButton(btnInventory);
+  StyleMenuButton(btnProducts);
+  StyleMenuButton(btnSuppliers);
+  StyleMenuButton(btnReports);
+
+  btnSignOut.Font.Name := 'Segoe UI';
+  btnSignOut.Font.Size := 10;
+
+  pnlContent.ParentBackground := False;
+  pnlContent.Color := COLOR_PAPER;
+  pnlContent.BevelOuter := bvNone;
+
+  lblEyebrow.Font.Name := 'Segoe UI';
+  lblEyebrow.Font.Size := 9;
+  lblEyebrow.Font.Style := [fsBold];
+  lblEyebrow.Font.Color := COLOR_MUTED;
+  lblEyebrow.ParentFont := False;
+
+  lblTitle.Font.Name := 'Georgia';
+  lblTitle.Font.Size := 26;
+  lblTitle.Font.Style := [fsBold];
+  lblTitle.Font.Color := COLOR_FOREST;
+  lblTitle.ParentFont := False;
+
+  lblDescription.Font.Name := 'Segoe UI';
+  lblDescription.Font.Size := 11;
+  lblDescription.Font.Color := COLOR_MUTED;
+  lblDescription.ParentFont := False;
+
+  pnlStatus.ParentBackground := False;
+  pnlStatus.Color := clWhite;
+  pnlStatus.BevelOuter := bvNone;
+  shpStatus.Brush.Color := RGB(91, 139, 95);
+  shpStatus.Pen.Color := RGB(91, 139, 95);
+
+  pnlCards.BevelOuter := bvNone;
+  pnlCards.ParentBackground := True;
+
+  btnOverview.OnClick := MenuButtonClick;
+  btnInventory.OnClick := MenuButtonClick;
+  btnProducts.OnClick := MenuButtonClick;
+  btnSuppliers.OnClick := MenuButtonClick;
+  btnReports.OnClick := MenuButtonClick;
+
+  SetActiveSection(btnOverview, 'Overview',
+    'Your inventory workspace at a glance.', 'Ready for today',
+    'Use the menu to capture stock, maintain products and review reports.', True);
+  FormResize(Self);
+end;
+
+procedure TfrmMenu.StyleMenuButton(AButton: TButton);
+begin
+  AButton.Font.Name := 'Segoe UI';
+  AButton.Font.Size := 10;
+  AButton.Font.Style := [];
+end;
+
+procedure TfrmMenu.SetUsername(const AUsername: string);
+begin
+  FUsername := AUsername;
+  if FUsername = '' then
+    lblEyebrow.Caption := 'INVENTORY WORKSPACE'
+  else
+    lblEyebrow.Caption := 'INVENTORY WORKSPACE  /  ' + UpperCase(FUsername);
+end;
+
+procedure TfrmMenu.SetActiveSection(AButton: TButton; const ATitle,
+  ADescription, AStatusTitle, AStatusText: string; AShowCards: Boolean);
+begin
+  btnOverview.Font.Style := [];
+  btnInventory.Font.Style := [];
+  btnProducts.Font.Style := [];
+  btnSuppliers.Font.Style := [];
+  btnReports.Font.Style := [];
+  AButton.Font.Style := [fsBold];
+
+  lblTitle.Caption := ATitle;
+  lblDescription.Caption := ADescription;
+  lblStatusTitle.Caption := AStatusTitle;
+  lblStatusText.Caption := AStatusText;
+  pnlCards.Visible := AShowCards;
+end;
+
+procedure TfrmMenu.MenuButtonClick(Sender: TObject);
+begin
+  if Sender = btnOverview then
+    SetActiveSection(btnOverview, 'Overview',
+      'Your inventory workspace at a glance.', 'Ready for today',
+      'Use the menu to capture stock, maintain products and review reports.', True)
+  else if Sender = btnInventory then
+    SetActiveSection(btnInventory, 'Inventory',
+      'Review quantities and record stock movements.', 'No inventory loaded',
+      'Add the inventory data source here when the database unit is ready.', False)
+  else if Sender = btnProducts then
+    SetActiveSection(btnProducts, 'Products',
+      'Create and maintain the products you keep in stock.', 'Product catalogue',
+      'This menu item is ready to connect to the products form.', False)
+  else if Sender = btnSuppliers then
+    SetActiveSection(btnSuppliers, 'Suppliers',
+      'Keep supplier details together and easy to find.', 'Supplier directory',
+      'This menu item is ready to connect to the suppliers form.', False)
+  else if Sender = btnReports then
+    SetActiveSection(btnReports, 'Reports',
+      'Turn inventory records into useful summaries.', 'Reporting area',
+      'This menu item is ready to connect to the reports form.', False);
+end;
+
+procedure TfrmMenu.FormResize(Sender: TObject);
+var
+  AvailableWidth, Gap, CardWidth: Integer;
+begin
+  if ClientWidth < 900 then
+    pnlSidebar.Width := 190
+  else
+    pnlSidebar.Width := 224;
+
+  lblEyebrow.SetBounds(44, 38, pnlContent.ClientWidth - 88, 20);
+  lblTitle.SetBounds(44, 68, pnlContent.ClientWidth - 88, 50);
+  lblDescription.SetBounds(44, 122, pnlContent.ClientWidth - 88, 30);
+  pnlStatus.SetBounds(44, 176, pnlContent.ClientWidth - 88, 92);
+
+  AvailableWidth := pnlContent.ClientWidth - 88;
+  Gap := 16;
+  CardWidth := (AvailableWidth - (Gap * 2)) div 3;
+  pnlCards.SetBounds(44, 292, AvailableWidth, 150);
+  pnlCard1.SetBounds(0, 0, CardWidth, 132);
+  pnlCard2.SetBounds(CardWidth + Gap, 0, CardWidth, 132);
+  pnlCard3.SetBounds((CardWidth + Gap) * 2, 0, CardWidth, 132);
+end;
+
+procedure TfrmMenu.btnSignOutClick(Sender: TObject);
+begin
+  ModalResult := mrOk;
+end;
+
+end.
