@@ -1,0 +1,309 @@
+unit PATlogin_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Winapi.Dwmapi, System.UITypes,
+  Vcl.Buttons, Vcl.Imaging.pngimage;
+
+type
+  TfrmLogin = class(TForm)
+    pnl_login1: TPanel;
+    lbl_login1: TLabel;
+    lbl_login2: TLabel;
+    pnl_login2: TPanel;
+    pnl_inner: TPanel;
+    edt_login1: TEdit;
+    pnl_outer1: TPanel;
+    btn_login1: TButton;
+    pnl_outer2: TPanel;
+    imgLogo: TImage;
+    lbl_login3: TLabel;
+    pnl_Register1: TPanel;
+    lbl_register1: TLabel;
+    pnl_register2: TPanel;
+    pnl_inner2: TPanel;
+    lbl_register2: TLabel;
+    lbl_register3: TLabel;
+    edt_login2: TEdit;
+    btn_login2: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure lbl_login3Click(Sender: TObject);
+    procedure lbl_register3Click(Sender: TObject);
+    procedure btn_login1Click(Sender: TObject);
+    procedure btn_login2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLogin: TfrmLogin;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmLogin.btn_login1Click(Sender: TObject);
+begin
+edt_login2.visible := true;
+btn_login2.Visible := true;
+end;
+
+procedure TfrmLogin.btn_login2Click(Sender: TObject);
+begin
+edt_login2.visible := false;
+btn_login2.Visible := false;
+end;
+
+procedure TfrmLogin.FormCreate(Sender: TObject);
+begin
+  { lbl_Login1 }
+  // aesthetic
+  pnl_login1.ParentBackground := False;
+  pnl_login1.Color := RGB(245, 241, 234);
+
+  lbl_login1.Font.Name := 'Georgia';
+  lbl_login1.Font.Size := 28;
+  lbl_login1.Font.Style := [fsBold];
+  lbl_login1.Font.Color := RGB(40, 44, 40);
+
+  // text
+  lbl_login1.Caption := 'Welcome to' + #13#10 + 'Fresh Count!';
+  lbl_login1.Alignment := taCenter;
+
+  // dynamic layout
+  lbl_login1.AutoSize := True;
+  lbl_login1.Left := (pnl_login1.Width - lbl_login1.Width) div 2;
+  lbl_login1.Top := 40;
+
+  { lbl_Login2 }
+  // slogan
+  lbl_login2.Caption := 'Inventory picked fresh daily.';
+  lbl_login2.Transparent := True;
+  lbl_login2.Font.Name := 'Arial';
+  lbl_login2.Font.Size := 11;
+  lbl_login2.Font.Color := RGB(115, 120, 115);
+
+  // stem alignment
+  lbl_login2.AutoSize := False;
+  lbl_login2.Alignment := taCenter;
+  lbl_login2.Width := lbl_login1.Width;
+  lbl_login2.Left := lbl_login1.Left;
+
+  // vertikale spas
+  lbl_login2.Top := 165;
+
+  { pnl_login2 }
+  pnl_login2.ParentBackground := False;
+  pnl_login2.Color := RGB(200, 200, 200);
+  pnl_login2.Width := 330;
+  pnl_login2.Height := 140;
+  pnl_login2.Left := (pnl_login1.Width - pnl_login2.Width) div 2;
+  pnl_login2.Top := lbl_login2.Top + lbl_login2.Height + 35;
+  pnl_login2.BevelOuter := bvNone;
+  pnl_login2.BevelInner := bvNone;
+  pnl_login2.ParentDoubleBuffered := False;
+  pnl_login2.DoubleBuffered := True;
+
+  // inner panel
+  pnl_inner.Parent := pnl_login2;
+  pnl_inner.ParentBackground := False;
+  pnl_inner.Color := RGB(252, 250, 248);
+  pnl_inner.Width := 328;
+  pnl_inner.Height := 138;
+  pnl_inner.Left := 1;
+  pnl_inner.Top := 1;
+  pnl_inner.BevelOuter := bvNone;
+  pnl_inner.BevelInner := bvNone;
+
+  { pnl_Outer1 }
+  pnl_outer1.ParentBackground := False;
+  pnl_outer1.Color := RGB(200, 200, 200);
+  pnl_outer1.Width := 302;
+  pnl_outer1.Height := 35;
+  pnl_outer1.Left := (pnl_login1.Width - pnl_outer1.Width) div 2;
+  pnl_outer1.Top := pnl_login2.Top + 25;
+  pnl_outer1.BevelOuter := bvNone;
+  pnl_outer1.BevelInner := bvNone;
+
+  { edt_Login1 }
+  edt_login1.Parent := pnl_outer1;
+  edt_login1.Color := RGB(255, 255, 255);
+  edt_login1.Width := 300;
+  edt_login1.Height := 33;
+  edt_login1.Left := 1;
+  edt_login1.Top := 1;
+  edt_login1.BorderStyle := bsNone;
+  edt_login1.Font.Name := 'Segoe UI';
+  edt_login1.Font.Size := 13;
+
+  // The Gray Placeholder Text
+  edt_login1.BringToFront;
+  edt_login1.Text := '';
+  edt_login1.TextHint := ' Enter your username...';
+
+  { btn_Login1 }
+  btn_login1.Parent := pnl_inner;
+  btn_login1.Width := 302;
+  btn_login1.Height := 33;
+  btn_login1.Left := 13;
+  btn_login1.Top := 80;
+  btn_login1.Caption := 'SIGN IN';
+  btn_login1.Font.Name := 'Segoe UI';
+  btn_login1.Font.Size := 10;
+  btn_login1.Font.Style := [fsBold];
+  btn_login1.Font.Color := clWhite;
+
+  {logo}
+  imgLogo.Parent := pnl_login1;
+  imgLogo.Picture.LoadFromFile('FreshCount.png');
+
+  imgLogo.Stretch := True;
+  imgLogo.Proportional := True;
+
+  imgLogo.Width := 320;
+  imgLogo.Height := 320;
+
+  imgLogo.Left := (pnl_login1.Width - imgLogo.Width) div 2;
+  imgLogo.Top := 430;
+
+  {login link}
+  lbl_login3.Caption := 'Click here to register.';
+  lbl_login3.Transparent := True;
+  lbl_login3.Font.Name := 'Arial';
+  lbl_login3.Font.Size := 11;
+  lbl_login3.Font.Color := RGB(115, 120, 115);
+
+  // stem alignment
+  lbl_login3.AutoSize := False;
+  lbl_login3.Alignment := taCenter;
+  lbl_login3.Width := lbl_login1.Width;
+  lbl_login3.Left := lbl_login1.Left;
+
+  // vertikale spas
+  lbl_login3.Top := 385;
+
+  //Panel Register 1
+  pnl_Register1.visible := false;
+
+  pnl_Register1.ParentBackground := False;
+  pnl_Register1.Color := RGB(245, 241, 234);
+
+  //Lbl Register 1
+  lbl_register1.Font.Name := 'Georgia';
+  lbl_register1.Font.Size := 28;
+  lbl_register1.Font.Style := [fsBold];
+  lbl_register1.Font.Color := RGB(40, 44, 40);
+
+  // text
+  lbl_register1.Caption := 'Register at' + #13#10 + 'Fresh Count!';
+  lbl_register1.Alignment := taCenter;
+
+  // dynamic layout
+  lbl_register1.AutoSize := True;
+  lbl_register1.Left := (pnl_login1.Width - lbl_login1.Width) div 2;
+  lbl_register1.Top := 40;
+
+  // panel register 2
+  pnl_register2.ParentBackground := False;
+  pnl_register2.Color := RGB(200, 200, 200);
+  pnl_register2.Width := 330;
+  pnl_register2.Height := 280;
+  pnl_register2.Left := (pnl_login1.Width - pnl_login2.Width) div 2;
+  pnl_register2.Top := lbl_login2.Top + lbl_login2.Height + 35;
+  pnl_register2.BevelOuter := bvNone;
+  pnl_register2.BevelInner := bvNone;
+  pnl_register2.ParentDoubleBuffered := False;
+  pnl_register2.DoubleBuffered := True;
+
+  //panel inner 2
+  pnl_inner2.Parent := pnl_register2;
+  pnl_inner2.ParentBackground := False;
+  pnl_inner2.Color := RGB(252, 250, 248);
+  pnl_inner2.Width := 328;
+  pnl_inner2.Height := 278;
+  pnl_inner2.Left := 1;
+  pnl_inner2.Top := 1;
+  pnl_inner2.BevelOuter := bvNone;
+  pnl_inner2.BevelInner := bvNone;
+
+  { lbl_Register2 }
+  // slogan
+  lbl_register2.Caption := 'Inventory picked fresh daily.';
+  lbl_register2.Transparent := True;
+  lbl_register2.Font.Name := 'Arial';
+  lbl_register2.Font.Size := 11;
+  lbl_register2.Font.Color := RGB(115, 120, 115);
+
+  // stem alignment
+  lbl_register2.AutoSize := False;
+  lbl_register2.Alignment := taCenter;
+  lbl_register2.Width := lbl_login1.Width;
+  lbl_register2.Left := lbl_login1.Left;
+
+  // vertikale spas
+  lbl_register2.Top := 165;
+
+  {Back to login}
+  lbl_register3.Caption := 'Click here to sign in.';
+  lbl_register3.Transparent := True;
+  lbl_register3.Font.Name := 'Arial';
+  lbl_register3.Font.Size := 11;
+  lbl_register3.Font.Color := RGB(115, 120, 115);
+
+  // stem alignment
+  lbl_register3.AutoSize := False;
+  lbl_register3.Alignment := taCenter;
+  lbl_register3.Width := lbl_login1.Width;
+  lbl_register3.Left := lbl_login1.Left;
+
+  // vertikale spas
+  lbl_register3.Top := 525;
+
+  //edt login 2
+  edt_login2.Visible := false;
+
+  edt_login2.Parent := pnl_outer1;
+  edt_login2.Color := RGB(255, 255, 255);
+  edt_login2.Width := 300;
+  edt_login2.Height := 33;
+  edt_login2.Left := 1;
+  edt_login2.Top := 1;
+  edt_login2.BorderStyle := bsNone;
+  edt_login2.Font.Name := 'Segoe UI';
+  edt_login2.Font.Size := 13;
+
+  // The Gray Placeholder Text
+  edt_login2.BringToFront;
+  edt_login2.Text := '';
+  edt_login2.TextHint := ' Enter your Password...';
+
+  // btn login 2
+  btn_login2.visible := false;
+  btn_login2.caption := 'Back';
+
+ // btn_login2.Parent := pnl_login1;
+  btn_login2.left := (pnl_login1.Width - lbl_login1.Width) div 2 + pnl_login2.width + 5;
+  btn_login2.top := 245;
+end;
+
+procedure TfrmLogin.lbl_login3Click(Sender: TObject);
+begin
+pnl_Register1.visible := true;
+pnl_Register1.Align := AlClient ; ////////////////////////////////////////////////////////
+btn_login2.visible := false;
+end;
+
+procedure TfrmLogin.lbl_register3Click(Sender: TObject);
+begin
+pnl_Register1.visible := false;
+end;
+
+
+
+end.
