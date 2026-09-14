@@ -1,4 +1,4 @@
-﻿unit PATlogin_u;
+unit PATlogin_u;
 
 interface
 
@@ -204,7 +204,7 @@ begin
   btn_login1.Font.Style := [fsBold];
   btn_login1.Font.Color := clWhite;
 
-  { logo }
+  {logo}
   imgLogo.Parent := pnl_login1;
   imgLogo.Stretch := True;
   imgLogo.Proportional := True;
@@ -215,7 +215,7 @@ begin
   imgLogo.Left := (pnl_login1.Width - imgLogo.Width) div 2;
   imgLogo.Top := 438;
 
-  { login link }
+  {login link}
   lbl_login3.Caption := 'Click here to register.';
   lbl_login3.Transparent := True;
   lbl_login3.Font.Name := 'Arial';
@@ -231,13 +231,13 @@ begin
   // vertikale spas
   lbl_login3.Top := 410;
 
-  // Panel Register 1
-  pnl_Register1.Visible := False;
+  //Panel Register 1
+  pnl_Register1.visible := false;
 
   pnl_Register1.ParentBackground := False;
   pnl_Register1.Color := RGB(245, 241, 234);
 
-  // Lbl Register 1
+  //Lbl Register 1
   lbl_register1.Font.Name := 'Georgia';
   lbl_register1.Font.Size := 28;
   lbl_register1.Font.Style := [fsBold];
@@ -264,7 +264,7 @@ begin
   pnl_register2.ParentDoubleBuffered := False;
   pnl_register2.DoubleBuffered := True;
 
-  // panel inner 2
+  //panel inner 2
   pnl_inner2.Parent := pnl_register2;
   pnl_inner2.ParentBackground := False;
   pnl_inner2.Color := RGB(252, 250, 248);
@@ -324,7 +324,7 @@ begin
   // vertikale spas
   lbl_register2.Top := 165;
 
-  { Back to login }
+  {Back to login}
   lbl_register3.Caption := 'Click here to sign in.';
   lbl_register3.Transparent := True;
   lbl_register3.Font.Name := 'Arial';
@@ -341,7 +341,7 @@ begin
   lbl_register3.Top := 525;
 
   { password field }
-  edt_login2.Visible := False;
+  edt_login2.Visible := false;
 
   pnl_outer2.Parent := pnl_inner;
   pnl_outer2.ParentBackground := False;
@@ -371,10 +371,10 @@ begin
   edt_login2.TextHint := ' Enter your Password...';
 
   // btn login 2
-  btn_login2.Visible := False;
-  btn_login2.Caption := 'BACK';
+  btn_login2.visible := false;
+  btn_login2.caption := 'BACK';
 
-  // btn_login2.Parent := pnl_login1;
+ // btn_login2.Parent := pnl_login1;
   btn_login2.Parent := pnl_inner;
   btn_login2.SetBounds(13, 148, 302, 25);
 
@@ -411,7 +411,8 @@ begin
   edt_login2.Text := '';
   pnl_Register1.Visible := False;
   pnl_login1.BringToFront;
-  MessageDlg('Account created. Sign in to continue.', mtInformation, [mbOK], 0);
+  MessageDlg('Account created. Sign in to continue.', mtInformation,
+    [mbOK], 0);
 end;
 
 procedure TfrmLogin.FormResize(Sender: TObject);
@@ -443,5 +444,7 @@ begin
   pnl_Register1.Visible := False;
   pnl_login1.BringToFront;
 end;
+
+
 
 end.

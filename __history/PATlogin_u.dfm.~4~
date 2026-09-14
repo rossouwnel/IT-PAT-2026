@@ -1,10 +1,10 @@
 object frmLogin: TfrmLogin
   Left = 0
   Top = 0
-  Caption = 'Fresh Count'
-  ClientHeight = 633
-  ClientWidth = 442
-  Color = clWhite
+  Caption = 'frmLogin'
+  ClientHeight = 679
+  ClientWidth = 888
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -15,12 +15,12 @@ object frmLogin: TfrmLogin
   object pnl_login1: TPanel
     Left = 0
     Top = 0
-    Width = 442
-    Height = 633
+    Width = 888
+    Height = 679
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 416
-    ExplicitHeight = 625
+    ExplicitLeft = 8
+    ExplicitWidth = 469
     object lbl_login1: TLabel
       Left = 102
       Top = 8
@@ -51580,35 +51580,27 @@ object frmLogin: TfrmLogin
         Caption = 'pnl_outer2'
         TabOrder = 1
       end
-      object edt_login2: TEdit
-        Left = 16
-        Top = 48
-        Width = 121
-        Height = 23
-        TabOrder = 2
-        Text = 'edt_login2'
-      end
     end
     object edt_login1: TEdit
-      Left = 78
-      Top = 237
+      Left = 84
+      Top = 225
       Width = 273
-      Height = 23
+      Height = 31
       Color = clWhite
       TabOrder = 2
       Text = 'edt_login1'
     end
     object pnl_outer1: TPanel
-      Left = 78
-      Top = 227
+      Left = 76
+      Top = 225
       Width = 281
       Height = 41
       Caption = 'pnl_outer1'
       TabOrder = 3
     end
     object pnl_Register1: TPanel
-      Left = 436
-      Top = 1
+      Left = 452
+      Top = 3
       Width = 385
       Height = 631
       TabOrder = 4

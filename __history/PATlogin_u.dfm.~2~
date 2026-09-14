@@ -1,10 +1,10 @@
 object frmLogin: TfrmLogin
   Left = 0
   Top = 0
-  Caption = 'Fresh Count'
-  ClientHeight = 633
-  ClientWidth = 442
-  Color = clWhite
+  Caption = 'frmLogin'
+  ClientHeight = 679
+  ClientWidth = 469
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -15,8 +15,8 @@ object frmLogin: TfrmLogin
   object pnl_login1: TPanel
     Left = 0
     Top = 0
-    Width = 442
-    Height = 633
+    Width = 469
+    Height = 679
     Align = alClient
     TabOrder = 0
     ExplicitWidth = 416
