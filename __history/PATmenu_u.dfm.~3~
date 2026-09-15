@@ -27,9 +27,9 @@ object frmMenu: TfrmMenu
       224
       620)
     object lblBrand: TLabel
-      Left = 14
-      Top = 28
-      Width = 210
+      Left = 24
+      Top = 30
+      Width = 176
       Height = 32
       Alignment = taCenter
       AutoSize = False
@@ -60,20 +60,20 @@ object frmMenu: TfrmMenu
       Caption = 'Inventory'
       TabOrder = 1
     end
-    object btnIngredients: TButton
+    object btnProducts: TButton
       Left = 20
       Top = 226
       Width = 184
       Height = 42
-      Caption = 'Ingredients'
+      Caption = 'Products'
       TabOrder = 2
     end
-    object btnRecipes: TButton
+    object btnSuppliers: TButton
       Left = 20
       Top = 276
       Width = 184
       Height = 42
-      Caption = 'Recipes'
+      Caption = 'Suppliers'
       TabOrder = 3
     end
     object btnReports: TButton

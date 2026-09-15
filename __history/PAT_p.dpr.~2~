@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   PATlogin_u in 'PATlogin_u.pas' {frmLogin},
   PATmenu_u in 'PATmenu_u.pas' {frmMenu},
-  dmod in 'dmod.pas' {DSGebruikers: TDataModule};
+  dmod in 'dmod.pas' {DataModule1: TDataModule};
 
 {$R *.res}
 
@@ -12,6 +12,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TDSGebruikers, DSGebruikers);
+  Application.CreateForm(TDataModule1, DataModule1);
   Application.Run;
 end.

@@ -1,0 +1,20 @@
+object DataModule1: TDataModule1
+  Height = 750
+  Width = 1000
+  PixelsPerInch = 120
+  object ADOConnection1: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Git\IT PAT 2026\' +
+      'Database.mdb;Mode=ReadWrite;Persist Security Info=False'
+    LoginPrompt = False
+    Mode = cmReadWrite
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 520
+    Top = 432
+  end
+  object ADOTable1: TADOTable
+    Left = 680
+    Top = 384
+  end
+end

@@ -1,0 +1,36 @@
+unit dmod;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB;
+
+type
+  Tado = class(TDataModule)
+    ADOConnection1: TADOConnection;
+    ADOTable1: TADOTable;
+    ADOTable2: TADOTable;
+    ADOTable3: TADOTable;
+    ADOTable4: TADOTable;
+    ADOTable5: TADOTable;
+    DataSource1: TDataSource;
+    DataSource2: TDataSource;
+    DataSource3: TDataSource;
+    DataSource4: TDataSource;
+    DataSource5: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ado: Tado;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

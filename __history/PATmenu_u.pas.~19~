@@ -56,12 +56,12 @@ implementation
 
 {$R *.dfm}
 
-const { KLEURE }
-  COLOUR_PAPER = $00EAF1F5;
-  COLOUR_FOREST = $00283A28;
-  COLOUR_SAGE = $00A0B89A;
-  COLOUR_MUTED = $00777B77;
-  COLOUR_BORDER = $00D7DED9;
+const
+  COLOR_PAPER = $00EAF1F5;
+  COLOR_FOREST = $00283A28;
+  COLOR_SAGE = $00A0B89A;
+  COLOR_MUTED = $00777B77;
+  COLOR_BORDER = $00D7DED9;
 
 procedure TfrmMenu.FormCreate(Sender: TObject);
 begin
@@ -74,7 +74,7 @@ begin
 
   { pnlSidebar }
   pnlSidebar.ParentBackground := False;
-  pnlSidebar.Color := COLOUR_FOREST;
+  pnlSidebar.Color := COLOR_FOREST;
   pnlSidebar.BevelOuter := bvNone;
 
   { lblBrand }
@@ -86,7 +86,7 @@ begin
 
   lblTagline.Font.Name := 'Segoe UI';
   lblTagline.Font.Size := 9;
-  lblTagline.Font.Color := COLOUR_SAGE;
+  lblTagline.Font.Color := COLOR_SAGE;
   lblTagline.ParentFont := False;
 
   StyleMenuButton(btnOverview);
@@ -99,24 +99,24 @@ begin
   btnSignOut.Font.Size := 10;
 
   pnlContent.ParentBackground := False;
-  pnlContent.Color := COLOUR_PAPER;
+  pnlContent.Color := COLOR_PAPER;
   pnlContent.BevelOuter := bvNone;
 
   lblEyebrow.Font.Name := 'Segoe UI';
   lblEyebrow.Font.Size := 9;
   lblEyebrow.Font.Style := [fsBold];
-  lblEyebrow.Font.Color := COLOUR_MUTED;
+  lblEyebrow.Font.Color := COLOR_MUTED;
   lblEyebrow.ParentFont := False;
 
   lblTitle.Font.Name := 'Georgia';
   lblTitle.Font.Size := 26;
   lblTitle.Font.Style := [fsBold];
-  lblTitle.Font.Color := COLOUR_FOREST;
+  lblTitle.Font.Color := COLOR_FOREST;
   lblTitle.ParentFont := False;
 
   lblDescription.Font.Name := 'Segoe UI';
   lblDescription.Font.Size := 11;
-  lblDescription.Font.Color := COLOUR_MUTED;
+  lblDescription.Font.Color := COLOR_MUTED;
   lblDescription.ParentFont := False;
 
   pnlStatus.ParentBackground := False;

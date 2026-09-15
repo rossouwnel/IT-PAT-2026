@@ -1,0 +1,56 @@
+object ado: Tado
+  Height = 750
+  Width = 1000
+  PixelsPerInch = 120
+  object ADOConnection1: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Git\IT PAT 2026\' +
+      'Database.mdb;Mode=ReadWrite;Persist Security Info=False'
+    LoginPrompt = False
+    Mode = cmReadWrite
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 296
+    Top = 40
+  end
+  object ADOTable1: TADOTable
+    Left = 232
+    Top = 120
+  end
+  object ADOTable2: TADOTable
+    Left = 232
+    Top = 192
+  end
+  object ADOTable3: TADOTable
+    Left = 232
+    Top = 264
+  end
+  object ADOTable4: TADOTable
+    Left = 232
+    Top = 336
+  end
+  object ADOTable5: TADOTable
+    Left = 232
+    Top = 408
+  end
+  object DataSource1: TDataSource
+    Left = 352
+    Top = 120
+  end
+  object DataSource2: TDataSource
+    Left = 352
+    Top = 192
+  end
+  object DataSource3: TDataSource
+    Left = 360
+    Top = 264
+  end
+  object DataSource4: TDataSource
+    Left = 360
+    Top = 336
+  end
+  object DataSource5: TDataSource
+    Left = 360
+    Top = 408
+  end
+end

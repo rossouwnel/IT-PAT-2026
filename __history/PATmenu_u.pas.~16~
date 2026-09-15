@@ -56,7 +56,7 @@ implementation
 
 {$R *.dfm}
 
-const { KLEURE }
+const
   COLOUR_PAPER = $00EAF1F5;
   COLOUR_FOREST = $00283A28;
   COLOUR_SAGE = $00A0B89A;
@@ -65,12 +65,11 @@ const { KLEURE }
 
 procedure TfrmMenu.FormCreate(Sender: TObject);
 begin
-  { frmMenu }
-  frmMenu.Caption := 'Fresh Count';
-  frmMenu.Position := poScreenCenter;
-  frmMenu.Constraints.MinWidth := 760;
-  frmMenu.Constraints.MinHeight := 540;
-  frmMenu.DoubleBuffered := True;
+  Caption := 'Fresh Count';
+  Position := poScreenCenter;
+  Constraints.MinWidth := 760;
+  Constraints.MinHeight := 540;
+  DoubleBuffered := True;
 
   { pnlSidebar }
   pnlSidebar.ParentBackground := False;

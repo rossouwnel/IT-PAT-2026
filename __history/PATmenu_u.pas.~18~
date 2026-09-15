@@ -56,7 +56,7 @@ implementation
 
 {$R *.dfm}
 
-const { KLEURE }
+const
   COLOUR_PAPER = $00EAF1F5;
   COLOUR_FOREST = $00283A28;
   COLOUR_SAGE = $00A0B89A;
