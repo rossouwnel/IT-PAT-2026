@@ -1,2 +1,8 @@
 Win32/
 Win64/
+.projectatlas/
+__history/
+Database.ldb
+*.dproj.local
+*.identcache
+*.err
