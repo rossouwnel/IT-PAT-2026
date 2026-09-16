@@ -47,6 +47,7 @@ type
     procedure btnMaakSkoonClick(Sender: TObject);
   private
     FGekoseID: Integer;
+    FLaaiBesig: Boolean;
     procedure LaaiVoorraad;
     function LeesGetal(AEdit: TEdit; const AVeld: string;
       out AGetal: Double): Boolean;
@@ -74,44 +75,49 @@ var
   Soek: string;
   Laag: Boolean;
 begin
-  grdVoorraad.RowCount := 2;
-  grdVoorraad.Cells[0, 0] := 'ID';
-  grdVoorraad.Cells[1, 0] := 'Bestanddeel';
-  grdVoorraad.Cells[2, 0] := 'Eenheid';
-  grdVoorraad.Cells[3, 0] := 'Voorraad';
-  grdVoorraad.Cells[4, 0] := 'Eenheidskoste';
-  grdVoorraad.Cells[5, 0] := 'Minimum';
-  grdVoorraad.Cells[6, 0] := 'Status';
-  Ry := 1;
-  Soek := LowerCase(Trim(edtSearch.Text));
-  dmDatabase.tblBestanddele.First;
-  while not dmDatabase.tblBestanddele.Eof do
-  begin
-    if dmDatabase.tblBestanddele.FieldByName('Aktief').AsBoolean and
-      ((Soek = '') or (Pos(Soek, LowerCase(dmDatabase.tblBestanddele.
-      FieldByName('BestanddeelNaam').AsString)) > 0)) then
-    begin
-      grdVoorraad.RowCount := Ry + 1;
-      grdVoorraad.Cells[0, Ry] := dmDatabase.tblBestanddele.FieldByName('BestanddeelID').AsString;
-      grdVoorraad.Cells[1, Ry] := dmDatabase.tblBestanddele.FieldByName('BestanddeelNaam').AsString;
-      grdVoorraad.Cells[2, Ry] := dmDatabase.tblBestanddele.FieldByName('Eenheid').AsString;
-      grdVoorraad.Cells[3, Ry] := FormatFloat('0.00', dmDatabase.tblBestanddele.FieldByName('HoeveelheidVoorraad').AsFloat);
-      grdVoorraad.Cells[4, Ry] := FormatFloat('R 0.00', dmDatabase.tblBestanddele.FieldByName('EenheidKoste').AsFloat);
-      grdVoorraad.Cells[5, Ry] := FormatFloat('0.00', dmDatabase.tblBestanddele.FieldByName('MinimumDrumpel').AsFloat);
-      Laag := dmDatabase.tblBestanddele.FieldByName('HoeveelheidVoorraad').AsFloat <=
-        dmDatabase.tblBestanddele.FieldByName('MinimumDrumpel').AsFloat;
-      if Laag then
-        grdVoorraad.Cells[6, Ry] := 'HERBESTEL'
-      else
-        grdVoorraad.Cells[6, Ry] := 'Reg';
-      Inc(Ry);
-    end;
-    dmDatabase.tblBestanddele.Next;
-  end;
-  if Ry = 1 then
-  begin
+  FLaaiBesig := True;
+  try
     grdVoorraad.RowCount := 2;
-    grdVoorraad.Rows[1].Clear;
+    grdVoorraad.Cells[0, 0] := 'ID';
+    grdVoorraad.Cells[1, 0] := 'Bestanddeel';
+    grdVoorraad.Cells[2, 0] := 'Eenheid';
+    grdVoorraad.Cells[3, 0] := 'Voorraad';
+    grdVoorraad.Cells[4, 0] := 'Eenheidskoste';
+    grdVoorraad.Cells[5, 0] := 'Minimum';
+    grdVoorraad.Cells[6, 0] := 'Status';
+    Ry := 1;
+    Soek := LowerCase(Trim(edtSearch.Text));
+    dmDatabase.tblBestanddele.First;
+    while not dmDatabase.tblBestanddele.Eof do
+    begin
+      if dmDatabase.tblBestanddele.FieldByName('Aktief').AsBoolean and
+        ((Soek = '') or (Pos(Soek, LowerCase(dmDatabase.tblBestanddele.
+        FieldByName('BestanddeelNaam').AsString)) > 0)) then
+      begin
+        grdVoorraad.RowCount := Ry + 1;
+        grdVoorraad.Cells[0, Ry] := dmDatabase.tblBestanddele.FieldByName('BestanddeelID').AsString;
+        grdVoorraad.Cells[1, Ry] := dmDatabase.tblBestanddele.FieldByName('BestanddeelNaam').AsString;
+        grdVoorraad.Cells[2, Ry] := dmDatabase.tblBestanddele.FieldByName('Eenheid').AsString;
+        grdVoorraad.Cells[3, Ry] := FormatFloat('0.00', dmDatabase.tblBestanddele.FieldByName('HoeveelheidVoorraad').AsFloat);
+        grdVoorraad.Cells[4, Ry] := FormatFloat('R 0.00', dmDatabase.tblBestanddele.FieldByName('EenheidKoste').AsFloat);
+        grdVoorraad.Cells[5, Ry] := FormatFloat('0.00', dmDatabase.tblBestanddele.FieldByName('MinimumDrumpel').AsFloat);
+        Laag := dmDatabase.tblBestanddele.FieldByName('HoeveelheidVoorraad').AsFloat <=
+          dmDatabase.tblBestanddele.FieldByName('MinimumDrumpel').AsFloat;
+        if Laag then
+          grdVoorraad.Cells[6, Ry] := 'HERBESTEL'
+        else
+          grdVoorraad.Cells[6, Ry] := 'Reg';
+        Inc(Ry);
+      end;
+      dmDatabase.tblBestanddele.Next;
+    end;
+    if Ry = 1 then
+    begin
+      grdVoorraad.RowCount := 2;
+      grdVoorraad.Rows[1].Clear;
+    end;
+  finally
+    FLaaiBesig := False;
   end;
 end;
 
@@ -221,6 +227,7 @@ end;
 procedure TfrmInventory.grdVoorraadSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
+  if FLaaiBesig then Exit;
   if (ARow < 1) or (grdVoorraad.Cells[0, ARow] = '') then Exit;
   FGekoseID := StrToInt(grdVoorraad.Cells[0, ARow]);
   if dmDatabase.tblBestanddele.Locate('BestanddeelID', FGekoseID, []) then

@@ -6,3 +6,4 @@ Database.ldb
 *.dproj.local
 *.identcache
 *.err
+tests/artifacts/
