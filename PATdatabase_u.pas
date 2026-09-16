@@ -3,7 +3,7 @@ unit PATdatabase_u;
 interface
 
 uses
-  System.SysUtils, System.Classes, System.IOUtils, System.Hash,
+  System.SysUtils, System.Classes, System.IOUtils,
   Data.DB, Data.Win.ADODB;
 
 const
@@ -24,7 +24,6 @@ type
     FLastError: string;
     FProviderName: string;
     function FindDatabase: string;
-    function HashPassword(const APassword: string): string;
     function TryOpenProvider(const AProvider: string): Boolean;
     procedure OpenTables;
   public
@@ -132,11 +131,6 @@ begin
   tblVerkope.Open;
 end;
 
-function TdmDatabase.HashPassword(const APassword: string): string;
-begin
-  Result := THashSHA2.GetHashString(APassword);
-end;
-
 function TdmDatabase.Authenticate(const AUsername, APassword: string): Boolean;
 begin
   Result := False;
@@ -153,9 +147,8 @@ begin
   while not tblGebruikers.Eof do
   begin
     if SameText(tblGebruikers.FieldByName('Gebruikersnaam').AsString,
-      Trim(AUsername)) and SameText(
-      tblGebruikers.FieldByName('WagwoordHash').AsString,
-      HashPassword(APassword)) and
+      Trim(AUsername)) and
+      (tblGebruikers.FieldByName('Wagwoord').AsString = APassword) and
       tblGebruikers.FieldByName('Aktief').AsBoolean then
     begin
       CurrentUserID := tblGebruikers.FieldByName('GebruikerID').AsInteger;
@@ -192,7 +185,7 @@ begin
   try
     tblGebruikers.Append;
     tblGebruikers.FieldByName('Gebruikersnaam').AsString := Trim(AUsername);
-    tblGebruikers.FieldByName('WagwoordHash').AsString := HashPassword(APassword);
+    tblGebruikers.FieldByName('Wagwoord').AsString := APassword;
     tblGebruikers.FieldByName('Rol').AsString := ARole;
     tblGebruikers.FieldByName('Aktief').AsBoolean := True;
     tblGebruikers.Post;
