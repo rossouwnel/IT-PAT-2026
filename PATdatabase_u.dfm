@@ -1,49 +1,49 @@
 object dmDatabase: TdmDatabase
-  OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 300
-  Width = 520
+  Height = 375
+  Width = 650
+  PixelsPerInch = 120
   object conDatabase: TADOConnection
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 48
-    Top = 32
+    Left = 60
+    Top = 40
   end
   object tblGebruikers: TADOTable
     Connection = conDatabase
     CursorType = ctStatic
     TableName = 'tblGebruikers'
-    Left = 48
-    Top = 104
+    Left = 60
+    Top = 130
   end
   object tblBestanddele: TADOTable
     Connection = conDatabase
     CursorType = ctStatic
     TableName = 'tblBestanddele'
-    Left = 152
-    Top = 104
+    Left = 190
+    Top = 130
   end
   object tblGeregte: TADOTable
     Connection = conDatabase
     CursorType = ctStatic
     TableName = 'tblGeregte'
-    Left = 272
-    Top = 104
+    Left = 340
+    Top = 130
   end
   object tblGeregBestanddele: TADOTable
     Connection = conDatabase
     CursorType = ctStatic
     TableName = 'tblGeregBestanddele'
-    Left = 368
-    Top = 104
+    Left = 460
+    Top = 130
   end
   object tblVerkope: TADOTable
     Connection = conDatabase
     CursorType = ctStatic
     TableName = 'tblVerkope'
-    Left = 48
-    Top = 184
+    Left = 60
+    Top = 230
   end
 end

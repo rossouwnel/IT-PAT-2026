@@ -178,7 +178,7 @@ begin
   if dmDatabase.tblBestanddele.Locate('BestanddeelID', FGekoseID, []) then
   begin
     dmDatabase.tblBestanddele.Edit;
-    dmDatabase.tblBestanddele.FieldByName('BestanddeelNaam').AsString := Trim(edtNaam.Text);
+    dmDatabase.tblBestanddele.FieldByName('BestanddeelNaam').AsString := Trim(edtNaam.Text); // trim haal spasies uit (begin/einde). trim altyd user input
     dmDatabase.tblBestanddele.FieldByName('Eenheid').AsString := Trim(edtEenheid.Text);
     dmDatabase.tblBestanddele.FieldByName('HoeveelheidVoorraad').AsFloat := Hoeveelheid;
     dmDatabase.tblBestanddele.FieldByName('EenheidKoste').AsFloat := Koste;

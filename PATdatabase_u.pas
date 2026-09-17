@@ -20,9 +20,6 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
-    FDatabasePath: string;
-    FLastError: string;
-    FProviderName: string;
     function FindDatabase: string;
     function TryOpenProvider(const AProvider: string): Boolean;
     procedure OpenTables;
@@ -30,6 +27,9 @@ type
     CurrentUserID: Integer;
     CurrentUsername: string;
     CurrentRole: string;
+    DatabasePath: string;
+    LastError: string;
+    ProviderName: string;
     arrGeregte: array[1..MAX_GEREGTE] of string;
     GeregAantal: Integer;
     function Authenticate(const AUsername, APassword: string): Boolean;
@@ -39,10 +39,7 @@ type
     function BerekenResepKoste(AGeregID: Integer): Currency;
     function IsGeregBeskikbaar(AGeregID, AAantal: Integer): Boolean;
     function BestanddeelNaam(ABestanddeelID: Integer): string;
-    function GeregNaam(AGeregID: Integer): string;
-    property DatabasePath: string read FDatabasePath;
-    property LastError: string read FLastError;
-    property ProviderName: string read FProviderName;
+    function GeregNaam(AGeregID: Integer): string;  
   end;
 
 var
@@ -56,28 +53,24 @@ implementation
 
 procedure TdmDatabase.DataModuleCreate(Sender: TObject);
 begin
-  FLastError := '';
-  FProviderName := '';
+  LastError := '';
+  ProviderName := '';
   CurrentUserID := 0;
-  FDatabasePath := FindDatabase;
-  if FDatabasePath = '' then
+  DatabasePath := 'C:\Git\IT PAT 2026\Database.mdb';
+  if DatabasePath = '' then
   begin
-    FLastError := 'Database.mdb kon nie gevind word nie.';
+    LastError := 'Database.mdb kon nie gevind word nie.';
     Exit;
   end;
   if not TryOpenProvider('Microsoft.Jet.OLEDB.4.0') then
-    if not TryOpenProvider('Microsoft.ACE.OLEDB.16.0') then
-      if not TryOpenProvider('Microsoft.ACE.OLEDB.12.0') then
-      begin
-        FLastError := 'Geen geskikte Microsoft Access-verskaffer is gevind nie. Bou die projek as Win32.';
-        Exit;
-      end;
+      LastError := 'Geen geskikte Microsoft Access-verskaffer is gevind nie. Bou die projek as Win32.';
+      Exit;
   try
     OpenTables;
     InitialiseerGeregteArray;
   except
-    on E: Exception do
-      FLastError := 'Die Access-databasis kon nie oopgemaak word nie: ' + E.Message;
+    on E: Exception do // Easier to ask for forgive than to ask permission
+      LastError := 'Die Access-databasis kon nie oopgemaak word nie: ' + E.Message;
   end;
 end;
 
@@ -91,29 +84,13 @@ begin
   conDatabase.Close;
 end;
 
-function TdmDatabase.FindDatabase: string;
-var
-  Candidate, ExeFolder: string;
-begin
-  Result := '';
-  ExeFolder := ExtractFilePath(ParamStr(0));
-  Candidate := TPath.Combine(ExeFolder, 'Database.mdb');
-  if TFile.Exists(Candidate) then
-    Exit(TPath.GetFullPath(Candidate));
-  Candidate := TPath.GetFullPath(TPath.Combine(ExeFolder, '..\..\Database.mdb'));
-  if TFile.Exists(Candidate) then
-    Exit(Candidate);
-  Candidate := TPath.Combine(GetCurrentDir, 'Database.mdb');
-  if TFile.Exists(Candidate) then
-    Result := TPath.GetFullPath(Candidate);
-end;
 
 function TdmDatabase.TryOpenProvider(const AProvider: string): Boolean;
 begin
   try
     conDatabase.Close;
     conDatabase.ConnectionString := 'Provider=' + AProvider + ';Data Source=' +
-      FDatabasePath + ';Persist Security Info=False;';
+      DatabasePath + ';Persist Security Info=False;';
     conDatabase.Open;
     FProviderName := AProvider;
     Result := True;
@@ -134,13 +111,13 @@ end;
 function TdmDatabase.Authenticate(const AUsername, APassword: string): Boolean;
 begin
   Result := False;
-  FLastError := '';
+  LastError := '';
   CurrentUserID := 0;
   CurrentUsername := '';
   CurrentRole := '';
   if not conDatabase.Connected then
   begin
-    FLastError := 'Daar is geen verbinding met die databasis nie.';
+    LastError := 'Daar is geen verbinding met die databasis nie.';
     Exit;
   end;
   tblGebruikers.First;
